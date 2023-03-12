@@ -172,9 +172,31 @@ namespace P21 {
 	};
 }
 
-//Problem
-namespace P {
+//Problem 121, Best Time to Buy and Sell Stock
+namespace P121 {
+	class Solution {
+	public:
+		// Sliding Window
+		int maxProfit(vector<int>& prices) {
+			int l = 0, r = 1;// left index=buy, right index=sell
+			int maxP = 0;
 
+			while (r < prices.size()) {
+				// it will make profit
+				if (prices[l] < prices[r]) {
+					int profit = prices[r] - prices[l];
+					maxP = std::max(maxP, profit);
+				}
+				// else need to find a new l for a lowest buy price
+				else {
+					l = r;
+				}
+				r += 1;
+			}
+
+			return maxP;
+		}
+	};
 }
 
 //Problem
